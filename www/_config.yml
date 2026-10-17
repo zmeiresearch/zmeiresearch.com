@@ -1,0 +1,24 @@
+title: Zmei Research
+description: Embedded, cars and DevOps
+url: "https://zmeiresearch.com"
+lang: en-US
+
+theme: jekyll-theme-zmei
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+nav:
+  - title: about
+    url: /about/
+  - title: blog
+    url: https://blog.zmeiresearch.com/
+
+social:
+  name: Zmei Research
+  links:
+    - https://github.com/zmeiresearch
+    - https://www.linkedin.com/in/ivanvasilev
+
+sass:
+  sourcemap: never

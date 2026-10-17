@@ -1,0 +1,266 @@
+// Based on pages-themes/hacker v0.2.0 (CC0) with the overrides
+// that zmeiresearch.github.io used, folded in and tidied up.
+@use "rouge-base16-dark";
+
+$background: #000;
+$foreground: #ddd;
+$accent: #1c1;
+$title: #b5e853;
+$title-glow: rgba(181, 232, 83, 0.1);
+$accent-glow: rgba(17, 204, 17, 0.25);
+$muted: #777;
+$code-background: #222;
+$border: rgba(255, 255, 255, 0.15);
+$container-max-width: 1000px;
+$mono: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
+$code-mono: "Sans Mono", Consolas, Courier, monospace;
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: $background;
+  color: $foreground;
+  font-size: 16px;
+  line-height: 1.5;
+  font-family: $mono;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  width: 90%;
+  max-width: $container-max-width;
+  margin: 0 auto;
+}
+
+/* Header */
+
+header {
+  width: 100%;
+  border-bottom: 1px dashed $title;
+  padding: 20px 0;
+  margin: 0 0 40px 0;
+}
+
+#a-title {
+  text-decoration: none;
+}
+
+.site-title {
+  font-size: 30px;
+  line-height: 1.5;
+  margin: 0 0 0 -40px;
+  font-weight: bold;
+  color: $title;
+  letter-spacing: -1px;
+  text-shadow: 0 0 5px $title-glow, 0 0 10px $title-glow;
+
+  &:before {
+    content: "./ ";
+    font-size: 24px;
+  }
+
+  @media (max-width: $container-max-width + 100px) {
+    margin-left: 0;
+  }
+}
+
+.site-description {
+  font-size: 18px;
+  font-weight: 300;
+  color: $muted;
+  margin: 0 0 10px;
+}
+
+nav a {
+  margin-right: 1.5em;
+  white-space: nowrap;
+
+  &:before {
+    content: "> ";
+    color: $muted;
+  }
+}
+
+/* Main content */
+
+#main_content {
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 1.2em 0 0.6em;
+  font-family: $mono;
+  font-weight: bold;
+  color: $accent;
+  letter-spacing: -0.03em;
+  text-shadow: 0 0 5px $accent-glow, 0 0 10px $accent-glow;
+}
+
+#main_content {
+  h1 { font-size: 28px; }
+  h2 { font-size: 22px; }
+  h3 { font-size: 18px; }
+  h4 { font-size: 16px; }
+  h5, h6 { font-size: 13px; text-transform: uppercase; }
+  h6 { color: $muted; }
+
+  > :first-child,
+  .post-meta + h1 {
+    margin-top: 0.2em;
+  }
+}
+
+a {
+  color: $accent;
+  text-decoration: none;
+  text-shadow: 0 0 5px $accent-glow;
+
+  &:hover,
+  &:focus {
+    text-decoration: underline;
+  }
+}
+
+ul li {
+  list-style-image: url("../images/bullet.png");
+}
+
+li {
+  line-height: 1.4;
+}
+
+dt {
+  font-style: italic;
+  font-weight: bold;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+blockquote {
+  color: #aaa;
+  margin-left: 0;
+  padding-left: 10px;
+  border-left: 1px dotted #666;
+}
+
+hr {
+  height: 0;
+  border: 0;
+  border-bottom: 1px dashed $accent;
+}
+
+table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  margin: 0 0 20px 0;
+}
+
+th {
+  text-align: left;
+  border-bottom: 1px dashed $accent;
+  padding: 5px 10px;
+}
+
+td {
+  padding: 5px 10px;
+}
+
+/* Code */
+
+code {
+  color: #fff;
+  font-family: $code-mono;
+  background: $code-background;
+}
+
+code.highlighter-rouge {
+  font-weight: bold;
+  padding: 0 3px;
+  border: 1px solid $border;
+  border-radius: 2px;
+}
+
+pre {
+  background: $code-background;
+  border: 1px solid $border;
+  padding: 10px;
+  font-size: 14px;
+  line-height: 1.4;
+  border-radius: 2px;
+  overflow-x: auto;
+  word-wrap: normal;
+
+  code {
+    background: none;
+    border: 0;
+    padding: 0;
+  }
+}
+
+/* Post list and posts */
+
+.post-list {
+  padding-left: 0;
+
+  li {
+    list-style: none;
+    margin-bottom: 1.2em;
+  }
+
+  h3 {
+    margin: 0;
+  }
+}
+
+.post-meta {
+  color: $muted;
+}
+
+.post-tags {
+  margin-top: 2em;
+  color: $muted;
+}
+
+/* Landing page */
+
+.landing {
+  text-align: center;
+
+  .logo {
+    width: 240px;
+    max-width: 60%;
+  }
+
+  .links {
+    padding: 0;
+
+    li {
+      list-style: none;
+      display: inline-block;
+      margin: 0 1em 0.5em;
+    }
+  }
+}
+
+/* Footer */
+
+footer {
+  border-top: 1px dashed #333;
+  padding: 15px 0;
+  color: $muted;
+  font-size: 13px;
+}

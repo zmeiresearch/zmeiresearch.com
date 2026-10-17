@@ -1,0 +1,36 @@
+name: zmeiresearch
+
+services:
+  edge:
+    build: edge
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - www
+      - blog
+
+  www:
+    build:
+      context: .
+      dockerfile: docker/site.Dockerfile
+      args:
+        SITE: www
+    restart: unless-stopped
+
+  blog:
+    build:
+      context: .
+      dockerfile: docker/site.Dockerfile
+      args:
+        SITE: blog
+    restart: unless-stopped
+
+volumes:
+  caddy_data:
+  caddy_config:

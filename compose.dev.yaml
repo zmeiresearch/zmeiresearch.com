@@ -1,0 +1,34 @@
+# Local preview with live reload:
+#   www  -> http://localhost:4000
+#   blog -> http://localhost:4001
+name: zmeiresearch-dev
+
+x-jekyll: &jekyll
+  image: zmeiresearch-jekyll-dev
+  volumes:
+    - ./theme:/src/theme
+    - ./www:/src/www
+    - ./blog:/src/blog
+
+services:
+  www:
+    <<: *jekyll
+    # Only one service builds the shared dev image
+    build:
+      context: .
+      dockerfile: docker/site.Dockerfile
+      target: dev
+    command: bundle exec jekyll serve --source www --destination /tmp/_site --host 0.0.0.0 --livereload --force_polling
+    ports:
+      - "4000:4000"
+      - "35729:35729"
+
+  blog:
+    <<: *jekyll
+    pull_policy: never
+    depends_on:
+      - www
+    command: bundle exec jekyll serve --source blog --destination /tmp/_site --host 0.0.0.0 --port 4001 --livereload --livereload-port 35730 --force_polling
+    ports:
+      - "4001:4001"
+      - "35730:35730"

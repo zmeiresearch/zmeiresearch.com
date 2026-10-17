@@ -1,0 +1,25 @@
+# Public entry point: TLS (Let's Encrypt), redirects and routing to site containers.
+
+(common) {
+	encode zstd gzip
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		-Server
+	}
+}
+
+zmeiresearch.com {
+	import common
+	reverse_proxy www:80
+}
+
+blog.zmeiresearch.com {
+	import common
+	reverse_proxy blog:80
+}
+
+www.zmeiresearch.com, zmeiresearch.bg, www.zmeiresearch.bg {
+	redir https://zmeiresearch.com{uri} permanent
+}

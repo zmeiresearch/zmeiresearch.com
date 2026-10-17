@@ -1,0 +1,50 @@
+version: "3"
+
+vars:
+  REMOTE: '{{.REMOTE | default "zmeiresearch.com"}}'
+
+tasks:
+  dev:
+    desc: "Local preview with live reload: www on :4000, blog on :4001"
+    cmds:
+      - docker compose -f compose.dev.yaml up --build
+
+  build:
+    desc: Build the production images locally
+    cmds:
+      - docker compose build
+
+  deploy:
+    desc: Build the images on the server (over SSH) and (re)start the stack
+    env:
+      DOCKER_HOST: ssh://{{.REMOTE}}
+    cmds:
+      - docker compose up -d --build --remove-orphans
+      - docker image prune -f
+
+  ps:
+    desc: Show the stack status on the server
+    env:
+      DOCKER_HOST: ssh://{{.REMOTE}}
+    cmds:
+      - docker compose ps
+
+  logs:
+    desc: Follow the stack logs on the server
+    env:
+      DOCKER_HOST: ssh://{{.REMOTE}}
+    cmds:
+      - docker compose logs -f --tail=100
+
+  lock:
+    desc: Regenerate Gemfile.lock after changing the Gemfile
+    cmds:
+      - docker run --rm -v "{{.ROOT_DIR}}":/src -w /src ruby:3.4-slim bundle lock
+
+  server-setup:
+    desc: One-time server cleanup; needs sudo, so it prompts for your password
+    interactive: true
+    cmds:
+      # Copied first so stdin stays a TTY for the sudo password prompt
+      - scp -q deploy/server-setup.sh {{.REMOTE}}:/tmp/server-setup.sh
+      - ssh -t {{.REMOTE}} 'sudo bash /tmp/server-setup.sh; rm -f /tmp/server-setup.sh'

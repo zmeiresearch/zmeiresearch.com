@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: "en-US" }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#000000">
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+    <link rel="icon" type="image/png" href="{{ '/assets/img/logo.png' | relative_url }}">
+    {% include head-custom.html %}
+    {% seo %}
+  </head>
+
+  <body>
+    <header>
+      <div class="container">
+        <a id="a-title" href="{{ '/' | relative_url }}">
+          <p class="site-title">{{ site.title }}</p>
+        </a>
+        <p class="site-description">{{ site.description }}</p>
+        {% if site.nav %}
+        <nav>
+          {% for link in site.nav %}
+          <a href="{{ link.url | relative_url }}">{{ link.title }}</a>
+          {% endfor %}
+        </nav>
+        {% endif %}
+      </div>
+    </header>
+
+    <div class="container">
+      <main id="main_content">
+        {{ content }}
+      </main>
+    </div>
+
+    <footer>
+      <div class="container">
+        &copy; {{ site.time | date: "%Y" }} Zmei Research
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+title: Zmei's blog
+description: >-
+  A place for random thoughts and observations. Mostly embedded, cars and DevOps
+url: "https://blog.zmeiresearch.com"
+lang: en-US
+author: Ivan
+github_username: zmeiresearch
+
+theme: jekyll-theme-zmei
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-feed
+
+permalink: /:year/:month/:day/:title/
+
+nav:
+  - title: home
+    url: https://zmeiresearch.com/
+  - title: about
+    url: https://zmeiresearch.com/about/
+  - title: rss
+    url: /feed.xml
+
+sass:
+  sourcemap: never
