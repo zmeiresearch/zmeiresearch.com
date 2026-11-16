@@ -23,6 +23,7 @@ Requires Docker and [Task](https://taskfile.dev).
 | `task build`        | Build production images locally                      |
 | `task deploy`       | Build on the server over SSH and (re)start the stack |
 | `task ps` / `logs`  | Stack status / logs on the server                    |
+| `task hits`         | Page hits, person/bot split; `BY=page\|day\|agent`, `DAYS=7` or `SINCE=2026-11 UNTIL=2026-12-15` |
 | `task lock`         | Regenerate `Gemfile.lock` after editing `Gemfile`    |
 | `task server-setup` | One-time cleanup of the old nginx/certbot setup (sudo) |
 
