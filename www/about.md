@@ -6,7 +6,7 @@ permalink: /about/
 
 # About
 
-*(Under Construction)*
+Ivan. I do software and electronics for fun and for a living.
 
 ## Find me
 
