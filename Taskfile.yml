@@ -36,6 +36,18 @@ tasks:
     cmds:
       - docker compose logs -f --tail=100
 
+  hits:
+    desc: "Page hit counts from the access log (GET 2xx, assets excluded)"
+    env:
+      DOCKER_HOST: ssh://{{.REMOTE}}
+    cmds:
+      - >-
+        docker compose exec -T edge sh -c 'cd /var/log/caddy; cat access.log; for f in access-*.gz; do [ -e "$f" ] && zcat "$f"; done; true'
+        | jq -r 'select(.request.method == "GET" and .status >= 200 and .status < 300)
+        | .request.host + (.request.uri | sub("[?#].*"; ""))
+        | select(test("\\.(css|js|png|jpe?g|gif|svg|ico|webp|woff2?|xml|txt|map)$") | not)'
+        | sort | uniq -c | sort -rn
+
   lock:
     desc: Regenerate Gemfile.lock after changing the Gemfile
     cmds:
