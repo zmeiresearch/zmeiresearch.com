@@ -6,6 +6,8 @@
 
 :80 {
 	root * /srv
+	# Theme files only ship under assets/, so serve the shared icon at the path browsers probe
+	rewrite /favicon.ico /assets/img/favicon.ico
 	file_server
 	header /assets/* Cache-Control "public, max-age=86400"
 

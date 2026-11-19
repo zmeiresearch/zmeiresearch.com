@@ -1,0 +1,14 @@
+---
+layout: null
+---
+# {{ site.title }}
+
+> {{ site.description }}. Personal site of Ivan Vasilev: software and electronics, professionally and for fun.
+
+## Pages
+
+- [About]({{ '/about/' | absolute_url }}): who runs this site and where to find them
+
+## Blog
+
+- [Zmei's blog](https://blog.zmeiresearch.com/): technical write-ups; post index at https://blog.zmeiresearch.com/llms.txt
